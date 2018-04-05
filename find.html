@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="jquery-1.8.3.min.js"></script>
+   <!-- <style>
+        #wrap{position:absolute; top:20px; right:0px; width:250px; height:50px;padding-top:20px;margin-left:20px;background:#f00;}
+        .gao{height:1000px}
+        .bgRed{background:#F00;}
+        .bgWhite{background:#FFF;}
+        )
+    </style>-->
+    /home/yws/projects/web/WARMLOVE/mainImg/find.html
+
+</head>
+<body>
+<form method="post" name="form1" action="" onSubmit="return chazhao();">
+    <!--<div id="wrap">
+        &lt;!&ndash;<input type="text" name="zhi" id="zhi">&ndash;&gt;
+        &lt;!&ndash;<input type="button" value="查找" id="chazhao">&ndash;&gt;
+    </div>-->
+   <!-- <div>完成CTRL+F的页面搜索功能</div>
+    <div class="gao"></div>
+    <div>J. Ohn1111111111</div>
+    <div class="gao"></div>-->
+    <div>J. Ohn1111111111222222222</div>
+    <textarea>加油啊，小伙子</textarea>
+    <div style="margin-top: 1000px">哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
+</form>
+<script>
+    $(document).ready(function(){
+        $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
+        var oldfindkey; //点点亮旧关键字
+        var currLen=0; //当前位置
+        $("#chazhao").click(function(){
+            findkey=$("#zhi").val(); //获取关键字
+            if (findkey!="")  //关键字不为空
+            {
+                keyLen=$("div:contains('"+findkey+"')").length; //得到页面中关键字的个数
+                if(keyLen>0)  //存在关键字
+                {
+                    if(oldfindkey==findkey){
+                        currLen=currLen % keyLen;
+                    }else{
+                        currLen=0;
+                        $("div:not(:contains('"+findkey+"'))").addClass("bgWhite");
+                        $("div:not(:contains('"+findkey+"')) input").addClass("bgWhite");
+                        $("#wrap").css("background", "red");
+                        $("div:contains('"+findkey+"')").addClass("bgRed");
+                    }
+                    $body.animate({scrollTop: $("div:contains("+findkey+"):eq("+currLen+")").offset().top}, 5);
+                    currLen=currLen+1;
+                    oldfindkey=findkey;
+                }else{ //点点亮不存在关键字
+                    currLen=0;
+                    oldfindkey="";
+                    $("div:not(:contains('"+findkey+"'))").addClass("bgWhite");
+                    $("#wrap").addClass("bgRed");
+                }
+            }
+        });
+
+        $(window).scroll(function(){
+            var h = $(this).scrollTop()+20;
+            $("#wrap").css("top",h);
+        });
+
+        return false;
+
+    });
+</script>
+</body>
+</html>
